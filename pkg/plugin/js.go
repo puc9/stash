@@ -74,6 +74,7 @@ func (t *jsPluginTask) initVM() error {
 	}
 
 	log := &javascript.Log{
+        PluginName: t.plugin.Name,
 		Progress: t.progress,
 	}
 

@@ -10,9 +10,10 @@ import (
 	"github.com/stashapp/stash/pkg/logger"
 )
 
-const pluginPrefix = "[Plugin] "
+const pluginPrefix = "[Plugin %s] %s"
 
 type Log struct {
+    PluginName string
 	Progress chan float64
 }
 
@@ -33,27 +34,27 @@ func (l *Log) argToString(call goja.FunctionCall) string {
 }
 
 func (l *Log) logTrace(call goja.FunctionCall) goja.Value {
-	logger.Trace(pluginPrefix + l.argToString(call))
+	logger.Tracef(pluginPrefix, l.PluginName, l.argToString(call))
 	return nil
 }
 
 func (l *Log) logDebug(call goja.FunctionCall) goja.Value {
-	logger.Debug(pluginPrefix + l.argToString(call))
+	logger.Debugf(pluginPrefix, l.PluginName, l.argToString(call))
 	return nil
 }
 
 func (l *Log) logInfo(call goja.FunctionCall) goja.Value {
-	logger.Info(pluginPrefix + l.argToString(call))
+	logger.Infof(pluginPrefix, l.PluginName, l.argToString(call))
 	return nil
 }
 
 func (l *Log) logWarn(call goja.FunctionCall) goja.Value {
-	logger.Warn(pluginPrefix + l.argToString(call))
+	logger.Warnf(pluginPrefix, l.PluginName, l.argToString(call))
 	return nil
 }
 
 func (l *Log) logError(call goja.FunctionCall) goja.Value {
-	logger.Error(pluginPrefix + l.argToString(call))
+	logger.Errorf(pluginPrefix, l.PluginName, l.argToString(call))
 	return nil
 }
 
